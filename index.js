@@ -27,31 +27,32 @@ async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
-        // Send a ping to confirm a successful connection
         const databaseCollection = client.db("Jute_Product").collection('example');
 
 
-        const exData = {
-            name: "Mina Razu",
-            email: "mina@mithu.com",
-        }
-        const result = await databaseCollection.insertOne(exData);
+        // const exData = {
+        //     name: "Mina Razu",
+        //     email: "mina@mithu.com",
+        // }
+        // const result = await databaseCollection.insertOne(exData);
 
 
 
         app.get('/get', async (req, res) => {
             const query = {};
-            const data = await databaseCollection.find(query).toArray();
-            console.log('data are colllecting')
+            const cursor = databaseCollection.find(query);
+            const data=await cursor.toArray();
             res.send(data);
-        })
-        console.log(`A new data is uploaded to mongodb with an id of ${result.insertedId}`);
-
-        app.get('/res', async (req, res) => {
-            res.send({ result })
+            console.log('data are colllecting');
         })
 
+        app.post('/add',async(req,res)=>{
+            const data=req.body;
+            const addData= await databaseCollection.insertOne(data);
+            res.send(addData);
+        })
 
+        
     } finally {
         // Ensures that the client will close when you finish/error
 
