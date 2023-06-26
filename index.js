@@ -28,6 +28,7 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         const databaseCollection = client.db("Jute_Product").collection('example');
+        const ProductCollection = client.db("Jute_Product").collection('products');
 
 
         // const exData = {
@@ -50,6 +51,18 @@ async function run() {
             const data=req.body;
             const addData= await databaseCollection.insertOne(data);
             res.send(addData);
+        })
+
+        app.post('/products',async(req,res)=>{
+            const product=req.body;
+            const result=await ProductCollection.insertOne(product);
+            res.send(result);
+        })
+
+        app.get('/products',async(req,res)=>{
+            const query={};
+            const products= await ProductCollection.find(query).toArray();
+            res.send(products);
         })
 
         
