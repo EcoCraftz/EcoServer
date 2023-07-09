@@ -30,15 +30,6 @@ async function run() {
         const databaseCollection = client.db("Jute_Product").collection('example');
         const ProductCollection = client.db("Jute_Product").collection('products');
 
-
-        // const exData = {
-        //     name: "Mina Razu",
-        //     email: "mina@mithu.com",
-        // }
-        // const result = await databaseCollection.insertOne(exData);
-
-
-
         app.get('/get', async (req, res) => {
             const query = {};
             const cursor = databaseCollection.find(query);
