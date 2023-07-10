@@ -62,13 +62,7 @@ async function run() {
             res.send(result);
 
         })
-        // app.get('/products',async(req,res)=>{
-        //     const catagory=req.query.qCatagory;
-        //     const query={catagory:catagory};
-        //     const products= await ProductCollection.find(query).toArray();
-        //     res.send(products);
-        //     console.log(catagory);
-        // })
+       
 
         app.get('/other/:catagory',async(req,res)=>{
             const catagory=req.params.catagory;
