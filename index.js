@@ -29,10 +29,11 @@ async function run() {
         await client.connect();
         const databaseCollection = client.db("Jute_Product").collection('example');
         const ProductCollection = client.db("Jute_Product").collection('products');
+        const BookingCollection = client.db("Jute_Product").collection('bookings');
 
-        app.get('/get', async (req, res) => {
+        app.get('/bookings', async (req, res) => {
             const query = {};
-            const cursor = databaseCollection.find(query);
+            const cursor = BookingCollection.find(query);
             const data=await cursor.toArray();
             res.send(data);
             console.log('data are colllecting');
@@ -47,6 +48,11 @@ async function run() {
         app.post('/products',async(req,res)=>{
             const product=req.body;
             const result=await ProductCollection.insertOne(product);
+            res.send(result);
+        })
+        app.post('/bookings',async(req,res)=>{
+            const booking=req.body;
+            const result=await BookingCollection.insertOne(booking);
             res.send(result);
         })
 
