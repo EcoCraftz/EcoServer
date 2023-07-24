@@ -48,6 +48,7 @@ async function run() {
         const ProductCollection = client.db("Jute_Product").collection('products');
         const BookingCollection = client.db("Jute_Product").collection('bookings');
         const userCollection = client.db("Jute_Product").collection('user');
+        const profileCollection = client.db("Jute_Product").collection('userProfile');
 
         app.get('/bookings', async (req, res) => {
             const query = {};
@@ -107,6 +108,33 @@ async function run() {
             const token = jwt.sign({email:email},process.env.ACCESS_TOKEN_SECRET,{ expiresIn: '7d' });
             res.send({result,token});
           });
+
+           //Api for inserting profile into db
+        app.post('/profile',async(req,res)=>{
+            const data=req.body;
+            const profile=await profileCollection.insertOne(data);
+            res.send(profile);
+          });
+
+          app.get('/profile/:email',async(req,res)=>{
+            const email=req.params.email;
+            const filter={email:email};
+            const myprofile=await profileCollection.findOne(filter);
+            res.send(myprofile);
+          })
+
+           //Api for updating profile into db
+        app.put('/profile/:email',verifyJwt,async(req,res)=>{
+            const email=req.params.email;
+            const filter={email:email};
+            const option={upsert:true};
+            const data=req.body;
+            const updateDoc = {
+              $set: data
+            };
+            const updateProfile=await profileCollection.updateOne(filter,updateDoc,option);
+            res.send(updateProfile);
+          })
 
         
     } finally {
