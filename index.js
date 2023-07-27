@@ -50,13 +50,7 @@ async function run() {
         const userCollection = client.db("Jute_Product").collection('user');
         const profileCollection = client.db("Jute_Product").collection('userProfile');
 
-        app.get('/bookings', async (req, res) => {
-            const query = {};
-            const cursor = BookingCollection.find(query);
-            const data=await cursor.toArray();
-            res.send(data);
-            console.log('data are colllecting');
-        })
+        
 
         app.post('/add',async(req,res)=>{
             const data=req.body;
@@ -73,7 +67,30 @@ async function run() {
             const booking=req.body;
             const result=await BookingCollection.insertOne(booking);
             res.send(result);
-        })
+        });
+        app.get('/bookings', async (req, res) => {
+            const query = {};
+            const cursor = BookingCollection.find(query);
+            const data=await cursor.toArray();
+            res.send(data);
+            console.log('data are colllecting');
+        });
+
+        app.get('/bookings/:email',async(req,res)=>{
+          const email=req.params.email;
+          console.log(email);
+          const query={email:email};
+          const bookingData= await BookingCollection.find(query).toArray();
+          res.send(bookingData);
+        });
+
+        app.get('/details/:id', async(req,res)=>{
+          const id=req.params.id;
+          console.log(id);
+          const query={_id: new ObjectId(id)};
+          const result=await BookingCollection.findOne(query);
+          res.send(result);
+      });
 
         app.get('/products',async(req,res)=>{
             const query={};
@@ -87,6 +104,7 @@ async function run() {
             res.send(result);
 
         })
+      
        
 
         app.get('/other/:catagory',async(req,res)=>{
@@ -134,7 +152,16 @@ async function run() {
             };
             const updateProfile=await profileCollection.updateOne(filter,updateDoc,option);
             res.send(updateProfile);
-          })
+          });
+          // Api for Deleting   
+            //Api for deleting Order
+        app.delete('/deleteBooking/:id',async(req,res)=>{
+          const id=req.params.id;
+          const filter={_id:new ObjectId(id)};
+          const removedata=await BookingCollection.deleteOne(filter);
+          res.send(removedata);
+        })
+          
 
         
     } finally {
