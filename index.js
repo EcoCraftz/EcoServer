@@ -134,11 +134,10 @@ async function run() {
             res.send(profile);
           });
 
-          app.get('/profile/:email',async(req,res)=>{
-            const email=req.params.email;
-            const filter={email:email};
-            const myprofile=await profileCollection.findOne(filter);
-            res.send(myprofile);
+          app.get('/users',async(req,res)=>{
+            const filter={};
+            const users= await userCollection.find(filter).toArray();
+            res.send(users);
           })
 
            //Api for updating profile into db
@@ -160,7 +159,45 @@ async function run() {
           const filter={_id:new ObjectId(id)};
           const removedata=await BookingCollection.deleteOne(filter);
           res.send(removedata);
-        })
+        });
+
+         //Api for delete a user
+      app.delete('/users/:email',verifyJwt,async(req,res)=>{
+        const email=req.params.email;
+        const filter={email:email};
+        const removeUser=await userCollection.deleteOne(filter);
+        res.send(removeUser);
+      })
+
+
+           //Api for making an user to admin
+           app.put("/user/admin/:email",verifyJwt,async(req,res)=>{
+            const email=req.params.email;
+            const initiator=req?.decoded.email;
+  
+            const initiatorAccount=await userCollection.findOne({email:initiator});
+            if(initiatorAccount.role==="Admin"){
+              const filter={email:email};
+              const updateDoc = {
+                $set:{
+                  role:'Admin'
+                }
+              };
+              const result= await userCollection.updateOne(filter,updateDoc);
+             return res.send(result);
+            }
+           else{
+            return res.status(403).send({message:'Forbidden'});
+           }
+          });
+
+           //Api for verify admin
+      app.get('/admin/:email',verifyJwt,async(req,res)=>{
+        const email=req.params.email;
+        const user=await userCollection.findOne({email:email});
+        const isAdmin=user.role==="Admin";
+        res.send({admin:isAdmin});
+      })
           
 
         
