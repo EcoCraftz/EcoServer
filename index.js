@@ -152,6 +152,20 @@ async function run() {
             const updateProfile=await profileCollection.updateOne(filter,updateDoc,option);
             res.send(updateProfile);
           });
+
+// api for updating booking data 
+app.put('/updateBooking/:id',verifyJwt,async(req,res)=>{
+  const id=req.params.id;
+  const filter={_id:new ObjectId(id)};
+  const option={upsert:true};
+  const editedData=req.body;
+  const updateDoc = {
+    $set: editedData
+  };
+  const updateBooking=await BookingCollection.updateOne(filter,updateDoc,option);
+  res.send(updateBooking);
+})
+
           // Api for Deleting   
             //Api for deleting Order
         app.delete('/deleteBooking/:id',async(req,res)=>{
