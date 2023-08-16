@@ -166,6 +166,19 @@ app.put('/updateBooking/:id',verifyJwt,async(req,res)=>{
   res.send(updateBooking);
 })
 
+// api for editing image 
+app.put('/updateImage/:id',verifyJwt,async(req,res)=>{
+  const id=req.params.id;
+  const filter={_id:new ObjectId(id)};
+  const option={upsert:true};
+  const editedImage=req.body;
+  const updateDoc = {
+    $set: editedImage
+  };
+  const updatedImage=await ProductCollection.updateOne(filter,updateDoc,option);
+  res.send(updatedImage);
+})
+
           // Api for Deleting   
             //Api for deleting Order
         app.delete('/deleteBooking/:id',async(req,res)=>{
@@ -181,6 +194,13 @@ app.put('/updateBooking/:id',verifyJwt,async(req,res)=>{
         const filter={email:email};
         const removeUser=await userCollection.deleteOne(filter);
         res.send(removeUser);
+      })
+
+      app.delete('/deleteProduct/:id',verifyJwt,async(req,res)=>{
+        const id=req.params.id;
+          const filter={_id:new ObjectId(id)};
+          const removedData=await ProductCollection.deleteOne(filter);
+          res.send(removedData);
       })
 
 
