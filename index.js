@@ -43,7 +43,7 @@ const verifyJwt=(req,res,next)=>{
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
+        client.connect();
         const databaseCollection = client.db("Jute_Product").collection('example');
         const ProductCollection = client.db("Jute_Product").collection('products');
         const BookingCollection = client.db("Jute_Product").collection('bookings');
