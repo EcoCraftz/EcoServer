@@ -97,12 +97,22 @@ async function run() {
             const products= await ProductCollection.find(query).toArray();
             res.send(products);
         })
+        app.get('/otherProducts',async(req,res)=>{
+            const query={};
+            const products= await ProductCollection.find(query).limit(25).toArray();
+            res.send(products);
+        })
         app.get('/products/:id', async(req,res)=>{
             const id=req.params.id;
             const query={_id:new ObjectId(id)};
             const result=await ProductCollection.findOne(query);
             res.send(result);
 
+        })
+
+            app.get('/latest',async(req,res)=>{
+            const preview=await ProductCollection.find({}).sort({$natural:-1}).limit(6).toArray()
+            res.send(preview);
         })
       
        
