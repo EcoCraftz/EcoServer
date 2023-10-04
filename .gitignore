@@ -1,2 +1,4 @@
 /.env
 /node_modules
+
+# Anything in this folder can not be seen in the github fulder
