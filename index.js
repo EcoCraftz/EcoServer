@@ -254,11 +254,6 @@ run().catch(console.dir);
 
 
 
-
-app.get('/', (req, res) => {
-    res.send('Hello From Client Server')
-})
-
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`EcoCrafz Server is listening on port ${port}`)
 })
