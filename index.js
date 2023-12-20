@@ -97,25 +97,39 @@ async function run() {
             const products= await ProductCollection.find(query).toArray();
             res.send(products);
         })
-
-        app.get('/products/:catagory1',async(req,res)=>{
+// api for getting items as catagory start
+        app.get('/product/:catagory1',async(req,res)=>{
           const catagory1=req.params.catagory1;
           const query={catagory:catagory1};
            const products= await ProductCollection.find(query).limit(3).toArray();
             res.send(products);
         })
-        app.get('/products/:catagory2',async(req,res)=>{
+        app.get('/product/:catagory2',async(req,res)=>{
           const catagory2=req.params.catagory2;
           const query={catagory:catagory2};
            const products= await ProductCollection.find(query).limit(3).toArray();
             res.send(products);
         })
-        app.get('/products/:catagory3',async(req,res)=>{
+        app.get('/product/:catagory3',async(req,res)=>{
           const catagory3=req.params.catagory3;
           const query={catagory:catagory3};
            const products= await ProductCollection.find(query).limit(3).toArray();
             res.send(products);
         })
+        app.get('/product/:catagory4',async(req,res)=>{
+          const catagory4=req.params.catagory4;
+          const query={catagory:catagory4};
+           const products= await ProductCollection.find(query).limit(3).toArray();
+            res.send(products);
+        })
+        app.get('/product/:catagory5',async(req,res)=>{
+          const catagory5=req.params.catagory5;
+          const query={catagory:catagory5};
+           const products= await ProductCollection.find(query).limit(3).toArray();
+            res.send(products);
+        })
+        // api for getting items as catagory end
+
         app.get('/otherProducts',async(req,res)=>{
             const query={};
             const products= await ProductCollection.find(query).limit(25).toArray();
