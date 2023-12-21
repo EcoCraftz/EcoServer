@@ -49,6 +49,7 @@ async function run() {
         const BookingCollection = client.db("Jute_Product").collection('bookings');
         const userCollection = client.db("Jute_Product").collection('user');
         const profileCollection = client.db("Jute_Product").collection('userProfile');
+        const catagoryCollection = client.db("Jute_Product").collection('insertedCatagory');
 
         
 
@@ -275,6 +276,27 @@ app.put('/updateImage/:id',verifyJwt,async(req,res)=>{
         const isAdmin=user.role==="Admin";
         res.send({admin:isAdmin});
       })
+
+
+      //Api for inserting data in catagory DB
+      app.post('/insertedCatagory',async(req,res)=>{
+        const data=req.body;
+        const inserted=await catagoryCollection.insertOne(data);
+        res.send(inserted);
+      });
+      app.get('/insertedCatagory',async(req,res)=>{
+        const query={};
+        const products= await catagoryCollection.find(query).toArray();
+        res.send(products);
+    });
+
+    app.delete('/insertedCatagory/:id',async(req,res)=>{
+      const id=req.params.id;
+      const filter={_id:new ObjectId(id)};
+      const removedata=await catagoryCollection.deleteOne(filter);
+      res.send(removedata);
+    });
+
           
 
         
