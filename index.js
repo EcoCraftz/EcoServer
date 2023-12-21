@@ -132,7 +132,7 @@ async function run() {
 
         app.get('/otherProducts',async(req,res)=>{
             const query={};
-            const products= await ProductCollection.find(query).limit(25).toArray();
+            const products= await ProductCollection.find(query).limit(24).toArray();
             res.send(products);
         })
         app.get('/products/:id', async(req,res)=>{
