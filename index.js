@@ -129,6 +129,12 @@ async function run() {
            const products= await ProductCollection.find(query).limit(3).toArray();
             res.send(products);
         })
+        app.get('/product/:catagory6',async(req,res)=>{
+          const catagory5=req.params.catagory6;
+          const query={catagory:catagory5};
+           const products= await ProductCollection.find(query).limit(3).toArray();
+            res.send(products);
+        })
         // api for getting items as catagory end
 
         app.get('/otherProducts',async(req,res)=>{
