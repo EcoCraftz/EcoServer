@@ -130,8 +130,8 @@ async function run() {
             res.send(products);
         })
         app.get('/product/:catagory6',async(req,res)=>{
-          const catagory5=req.params.catagory6;
-          const query={catagory:catagory5};
+          const catagory6=req.params.catagory6;
+          const query={catagory:catagory6};
            const products= await ProductCollection.find(query).limit(3).toArray();
             res.send(products);
         })
