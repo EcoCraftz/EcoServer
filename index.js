@@ -135,6 +135,24 @@ async function run() {
            const products= await ProductCollection.find(query).limit(3).toArray();
             res.send(products);
         })
+        app.get('/product/:catagory7',async(req,res)=>{
+          const catagory7=req.params.catagory7;
+          const query={catagory:catagory7};
+           const products= await ProductCollection.find(query).limit(3).toArray();
+            res.send(products);
+        })
+        app.get('/product/:catagory8',async(req,res)=>{
+          const catagory8=req.params.catagory8;
+          const query={catagory:catagory8};
+           const products= await ProductCollection.find(query).limit(3).toArray();
+            res.send(products);
+        })
+        app.get('/product/:catagory9',async(req,res)=>{
+          const catagory9=req.params.catagory9;
+          const query={catagory:catagory9};
+           const products= await ProductCollection.find(query).limit(3).toArray();
+            res.send(products);
+        })
         // api for getting items as catagory end
 
         app.get('/otherProducts',async(req,res)=>{
