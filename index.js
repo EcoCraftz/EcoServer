@@ -102,8 +102,9 @@ async function run() {
             const products= await ProductCollection.find(query).sort({$natural:-1}).limit(16).toArray();
             res.send(products);
         })
-        app.get('/handyProducts',async(req,res)=>{
-            const query={parent:"Default"};
+        app.get('/handyProducts/:Need',async(req,res)=>{
+          const need=req.params.Need;
+            const query={parent:need};
             const products= await ProductCollection.find(query).sort({$natural:-1}).limit(16).toArray();
             res.send(products);
         })
