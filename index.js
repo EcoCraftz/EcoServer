@@ -106,7 +106,7 @@ async function run() {
           const need=req.params.Need;
           console.log(need);
             const query={parent:need};
-            const products= await ProductCollection.find(query).sort({$natural:-1}).limit(16).toArray();
+            const products= await ProductCollection.find(query).limit(16).toArray();
             res.send(products);
         })
 // api for getting items as catagory start
