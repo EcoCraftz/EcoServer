@@ -97,8 +97,9 @@ async function run() {
             const products= await ProductCollection.find(query).toArray();
             res.send(products);
         })
-        app.get('/juteProducts',async(req,res)=>{
-            const query={};
+        app.get('/juteProducts/:frame1',async(req,res)=>{
+          const frame1=req.params.frame1;
+            const query={catagory:frame1};
             const products= await ProductCollection.find(query).toArray();
             res.send(products);
         })
