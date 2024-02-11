@@ -99,7 +99,7 @@ async function run() {
         })
         app.get('/juteProducts',async(req,res)=>{
             const query={};
-            const products= await ProductCollection.find(query).toArray();
+            const products= await ProductCollection.find(query).sort({$natural:-1}).limit(16).toArray();
             res.send(products);
         })
 // api for getting items as catagory start
