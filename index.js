@@ -87,7 +87,6 @@ async function run() {
 
         app.get('/details/:id', async(req,res)=>{
           const id=req.params.id;
-          console.log(id);
           const query={_id: new ObjectId(id)};
           const result=await BookingCollection.findOne(query);
           res.send(result);
@@ -98,59 +97,65 @@ async function run() {
             const products= await ProductCollection.find(query).toArray();
             res.send(products);
         })
+        app.get('/juteProducts/:frame1',async(req,res)=>{
+          const frame1=req.params.frame1;
+            const query={catagory:frame1};
+            const products= await ProductCollection.find(query).toArray();
+            res.send(products);
+        })
 // api for getting items as catagory start
         app.get('/product/:catagory1',async(req,res)=>{
           const catagory1=req.params.catagory1;
           const query={catagory:catagory1};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory2',async(req,res)=>{
           const catagory2=req.params.catagory2;
           const query={catagory:catagory2};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory3',async(req,res)=>{
           const catagory3=req.params.catagory3;
           const query={catagory:catagory3};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory4',async(req,res)=>{
           const catagory4=req.params.catagory4;
           const query={catagory:catagory4};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory5',async(req,res)=>{
           const catagory5=req.params.catagory5;
           const query={catagory:catagory5};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory6',async(req,res)=>{
           const catagory6=req.params.catagory6;
           const query={catagory:catagory6};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory7',async(req,res)=>{
           const catagory7=req.params.catagory7;
           const query={catagory:catagory7};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory8',async(req,res)=>{
           const catagory8=req.params.catagory8;
           const query={catagory:catagory8};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         app.get('/product/:catagory9',async(req,res)=>{
           const catagory9=req.params.catagory9;
           const query={catagory:catagory9};
-           const products= await ProductCollection.find(query).limit(3).toArray();
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(3).toArray();
             res.send(products);
         })
         // api for getting items as catagory end
