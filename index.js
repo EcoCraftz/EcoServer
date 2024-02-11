@@ -110,6 +110,12 @@ async function run() {
             res.send(products);
         })
 // api for getting items as catagory start
+        app.get('/qproduct/:qcatagory',async(req,res)=>{
+          const qcatagory=req.params.qcatagory;
+          const query={catagory:qcatagory};
+           const products= await ProductCollection.find(query).sort({$natural:-1}).limit(15).toArray();
+            res.send(products);
+        })
         app.get('/product/:catagory1',async(req,res)=>{
           const catagory1=req.params.catagory1;
           const query={catagory:catagory1};
