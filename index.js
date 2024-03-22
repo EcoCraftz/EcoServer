@@ -1,10 +1,10 @@
-//const express = require('express');
-//const cors = require('cors');
-//const port = process.env.PORT||4000;
+const express = require('express');
+const cors = require('cors');
+const port = process.env.PORT||4000;
 require('dotenv').config();
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-//const app = express();
+const app = express();
 
 // middleware
 app.use(cors());
